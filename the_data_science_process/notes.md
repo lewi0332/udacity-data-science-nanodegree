@@ -61,4 +61,90 @@ Fancy machine learning algorithms
 With that, you will be getting a more in depth look at these items, but it is worth mentioning (given the massive amount of hype) that they do not solve all the problems. Deep learning cannot turn bad data into good conclusions. Or bad questions into amazing results.
 
 
+When looking at the first two questions:
 
+How to break into the field?
+What are the placement and salaries for those who attended a coding bootcamp?
+we did not need to do any predictive modeling. We only used descriptive and a little inferential statistics to retrieve the results.
+
+Therefore, all steps of CRISP-DM were not necessary for these first two questions. The process would look closer to the following:
+
+1. Business Understanding
+
+2. Data Understanding
+
+3. Prepare Data
+
+4. Evaluate the Results
+
+5. Deploy
+
+However, for the last two questions:
+
+How well can we predict an individual's salary? What aspects correlate well to salary?
+
+How well can we predict an individual's job satisfaction? What aspects correlate well to job satisfaction?
+
+We will need to use a predictive model. We will need to pick up at step 3 to answer these two questions, so let's get started. The process for answering these last two questions will follow the full 6 steps shown here.
+
+1. Business Understanding
+
+2. Data Understanding
+
+3. Prepare Data
+
+4. Model Data
+
+5. Evaluate the Results
+
+6. Deploy
+
+Data Modeling Process
+
+1. Instantiate
+
+2. Fit
+
+3. Predict
+
+4. Score
+
+
+There are two main 'pain' points for passing data to machine learning models in sklearn:
+
+Missing Values
+Categorical Values
+Sklearn does not know how you want to treat missing values or categorical variables, and there are lots of methods for working with each. For this lesson, we will look at common, quick fixes. These methods help you get your models into production quickly, but thoughtful treatment of missing values and categorical variables should be done to remove bias and improve predictions over time.
+
+Three strategies for working with missing values include:
+
+We can remove (or “drop”) the rows or columns holding the missing values.
+We can impute the missing values.
+We can build models that work around them, and only use the information provided.
+
+Though dropping rows and/or columns holding missing values is quite easy to do using numpy and pandas, it is often not appropriate.
+
+Understanding why the data is missing is important before dropping these rows and columns. In this video you saw a number of situations in which dropping values was not a good idea. These included
+
+Dropping data values associated with the effort or time an individual put into a survey.
+Dropping data values associated with sensitive information.
+In either of these cases, the missing values hold information. A quick removal of the rows or columns associated with these missing values would remove missing data that could be used to better inform models.
+
+Instead of removing these values, we might keep track of the missing values using indicator values, or counts associated with how many questions an individual skipped.
+
+
+n the last video, you saw cases in which dropping rows or columns associated with missing values would not be a good idea. There are other cases in which dropping rows or columns associated with missing values would be okay.
+
+A few instances in which dropping a row might be okay are:
+
+Dropping missing data associated with mechanical failures.
+The missing data is in a column that you are interested in predicting.
+Other cases when you should consider dropping data that are not associated with missing data:
+
+Dropping columns with no variability in the data.
+Dropping data associated with information that you know is not correct.
+In handling removing data, you should think more about why is this missing or why is this data incorrectly input to see if an alternative solution might be used than dropping the values.
+
+One common strategy for working with missing data is to understand the proportion of a column that is missing. If a large proportion of a column is missing data, this is a reason to consider dropping it.
+
+There are easy ways using pandas to create dummy variables to track the missing values, so you can see if these missing values actually hold information (regardless of the proportion that are missing) before choosing to remove a full column.
