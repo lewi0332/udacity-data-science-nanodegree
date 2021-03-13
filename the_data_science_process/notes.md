@@ -167,5 +167,62 @@ The **disadvantages** of this approach are that you introduce a large number of 
 
 Let's try out adding dummy variables for the categorical variables into the model.  We will compare to see the improvement over the original model only using quantitative variables.  
 
+## Overfitting
 
-#### Run the two cells below to get started.
+Overfitting is a common problem when our model does not generalize to data it has not seen before. Assuring you build models that not only work for the data the model was trained on, but also generalize to new (test) data, is key to building models that will be successful to deploy and that will become successful in production.
+
+
+# CRISP-DM
+
+In working with missing values, categorical variables, and building out your model, it was probably easy to lose site of the big picture of the process. Let's take a quick second to recap that here, and pull together the results you should have arrived through your analysis.
+
+1. Business Understanding
+
+How do I break into the field?
+What are the placement and salaries of those who attended a coding bootcamp?
+How well can we predict an individual's salary? What aspects correlate well to salary?
+How well can we predict an individual's job satisfaction? What aspects correlate well to job satisfaction?
+2. Data Understanding
+
+Here we used the StackOverflow data to attempt to answer our questions of interest. We did 1. and 2. in tandem in this case, using the data to help us arrive at our questions of interest. This is one of two methods that is common in practice. The second method that is common is to have certain questions you are interested in answering, and then having to collect data related to those questions.
+
+3. Prepare Data
+
+This is commonly denoted as 80% of the process. You saw this especially when attempting to build a model to predict salary, and there was still much more you could have done. From working with missing data to finding a way to work with categorical variables, and we didn't even look for outliers or attempt to find points we were especially poor at predicting. There was ton more we could have done to wrangle the data, but you have to start somewhere, and then you can always iterate.
+
+4. Model Data
+
+We were finally able to model the data, but we had some back and forth with step 3. before we were able to build a model that had okay performance. There still may be changes that could be done to improve the model we have in place. From additional feature engineering to choosing a more advanced modeling technique, we did little to test that other approaches were better within this lesson.
+
+5. Results
+
+Results are the findings from our wrangling and modeling. They are the answers you found to each of the questions.
+
+6. Deploy
+
+Deploying can occur by moving your approach into production or by using your results to persuade others within a company to act on the results. Communication is such an important part of the role of a data scientist.
+
+### Two techniques for deploying your results include:
+
+Automated techniques built into computer systems or across the web. You will do this later in this program!
+
+Communicate results with text, images, slides, dashboards, or other presentation methods to company stakeholders.
+To get some practice with this second technique, you will be writing a blog post for the first project and turning in a Github repository that shares your work.
+
+As a data scientist, communication of your results to both other team members and to less technical members of a company is a critical component
+
+
+# Readme Showcase
+
+[Sample Project](https://github.com/jjrunner/stackoverflow)
+
+1. Installation - Extra libraries that are not installed with the Anaconda distribution, as well as what what version of python you are using should be noted.
+
+2. Project Motivation - Discuss what your project is about, and what interested you in pursuing the project.
+
+3.File Descriptions - Guide others through the files in your repository. You may not talk about every file here, but you should let them know where they can find the work they might find most interesting.
+
+4. How To Interact With Your Project - When your project isn't meant to be interactive or used for other projects, you should instead talk about the technical details of your project. What were your results? What did you do to improve them? What methods did you try? What worked? What didn't work?
+
+5.Licensing, Authors, Acknowledgements - You always want to give credit where necessary. Acknowledge other contributors, helpful peers, data providers, etc.
+
