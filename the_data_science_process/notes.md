@@ -1,16 +1,58 @@
+# The CRISP-DM Process (Cross Industry Process for Data Mining)
+
+The lessons leading up to the first project are about helping you go through CRISP-DM in practice from start to finish. Even when we get into the weeds of coding, try to take a step back and realize what part of the process you are in, and assure that you remember the question you are trying answer and what a solution to that question looks like.
+
+1. Business Understanding
+
+2. Data Understanding
+
+3. Prepare Data
+
+4. Data Modeling
+
+5. Evaluate the Results
+
+6. Deploy
+
+--- 
+
+`3`
+
 The first two steps of CRISP-DM are:
 
-1. Business Understanding - this means understanding the problem and questions you are interested in tackling in the context of whatever domain you're working in. Examples include
+1. **Business Understanding** - this means understanding the problem and questions you are interested in tackling in the context of whatever domain you're working in. Examples include
 
-How do we acquire new customers?
-Does a new treatment perform better than an existing treatment?
-How can improve communication?
-How can we improve travel?
-How can we better retain information?
-2. Data Understanding - at this step, you need to move the questions from Business Understanding to data. You might already have data that could be used to answer the questions, or you might have to collect data to get at your questions of interest.
+   - How do we acquire new customers?
+   - Does a new treatment perform better than an existing treatment?
+   - How can we improve communication?
+   - How can we improve travel?
+   - How can we better retain information?
 
 
-The CRISP-DM Process (Cross Industry Process for Data Mining)
+2. **Data Understanding** - at this step, you need to move the questions from **Business Understanding** to data. You might already have data that could be used to answer the questions, or you might have to collect data to get at your questions of interest.
+
+---
+
+`9`
+
+**Business and Data Understanding**
+
+**Business Questions**
+- How do I break into the field?
+- What are the placement and salaries of those who attended a coding bootcamp?
+- How well can we predict an individual's salary? What aspects correlate well to salary?
+- How well can we predict an individual's job satisfaction? What aspects correlate well to job satisfaction?
+
+**Data Understanding**
+
+You will be using the Stackoverflow survey data to get some insight into each of these questions. In the rest of the lesson, you can work along with me to answer these questions, or you can take your own approach to see if the conclusions you draw are similar to those you would find throughout this lesson.
+
+---
+
+`10`
+
+**The CRISP-DM Process (Cross Industry Process for Data Mining)**
+
 We have now defined the questions we want to answer and had a look through the data available to find the answers, that is, we have looked at the first two steps here:
 
 1. Business Understanding
@@ -25,11 +67,16 @@ Luckily stackoverflow has already collected the data for us. However, we still n
 
 We will discuss the advantages and disadvantages of the strategies discussed in this lesson.
 
+--- 
+
+`18`
+
 When looking at the first two questions:
 
-How to break into the field?
-What are the placement and salaries for those who attended a coding bootcamp?
-we did not need to do any predictive modeling. We only used descriptive and a little inferential statistics to retrieve the results.
+- How to break into the field?
+- What are the placement and salaries for those who attended a coding bootcamp?
+
+We did not need to do any predictive modeling. We only used **descriptive** and a little **inferential** statistics to retrieve the results.
 
 Therefore, all steps of CRISP-DM were not necessary for these first two questions. CRISP-DM states 6 steps:
 
@@ -45,27 +92,34 @@ Therefore, all steps of CRISP-DM were not necessary for these first two question
 
 6. Deploy
 
-For these first two questions, we did not need step 4. In the previous notebooks, you performed steps 3 and 5 without needing step 4 at all. A lot of the hype in data science, artificial intelligence, and deep learning is integrated into step 4, but there are still plenty of questions to be answered not using machine learning, artificial intelligence, and deep learning.
 
-All Data Science Problems Involve
-Curiosity.
+For these first two questions, we did not need step `4`. In the previous notebooks, you performed steps `3` and `5` without needing step `4` at all. A lot of the hype in data science, artificial intelligence, and deep learning is integrated into step `4`, but there are still plenty of questions to be answered not using machine learning, artificial intelligence, and deep learning.
 
-The right data.
+**All Data Science Problems Involve**
 
-A tool of some kind (Python, Tableau, Excel, R, etc.) used to find a solution (You could use your head, but that would be inefficient with the massive amounts of data being generated in the world today).
+- Curiosity.
 
-Well communicated or deployed solution.
-Extra Useful Tools to Know But That Are NOT Necessary for ALL Projects
-Deep Learning
-Fancy machine learning algorithms
+- The **right** data.
+
+- A tool of some kind (Python, Tableau, Excel, R, etc.) used to find a solution (You could use your head, but that would be inefficient with the massive amounts of data being generated in the world today).
+
+- Well communicated or deployed solution.
+
+**Extra Useful Tools to Know But That Are NOT Necessary for ALL Projects**
+- Deep Learning
+- Fancy machine learning algorithms
+
 With that, you will be getting a more in depth look at these items, but it is worth mentioning (given the massive amount of hype) that they do not solve all the problems. Deep learning cannot turn bad data into good conclusions. Or bad questions into amazing results.
 
+---
+
+`19`
 
 When looking at the first two questions:
 
 How to break into the field?
 What are the placement and salaries for those who attended a coding bootcamp?
-we did not need to do any predictive modeling. We only used descriptive and a little inferential statistics to retrieve the results.
+we did not need to do any predictive modeling. We only used **descriptive** and a little **inferential** statistics to retrieve the results.
 
 Therefore, all steps of CRISP-DM were not necessary for these first two questions. The process would look closer to the following:
 
@@ -81,79 +135,110 @@ Therefore, all steps of CRISP-DM were not necessary for these first two question
 
 However, for the last two questions:
 
-How well can we predict an individual's salary? What aspects correlate well to salary?
+1. How well can we predict an individual's salary? What aspects correlate well to salary?
 
-How well can we predict an individual's job satisfaction? What aspects correlate well to job satisfaction?
+2. How well can we predict an individual's job satisfaction? What aspects correlate well to job satisfaction?
 
 We will need to use a predictive model. We will need to pick up at step 3 to answer these two questions, so let's get started. The process for answering these last two questions will follow the full 6 steps shown here.
 
-1. Business Understanding
+In the modeling section, you will learn that step three of CRISP-DM is essential to getting the most out of your data. In this case, we are interested in using any of the variables we can from the dataset to predict an individual's salary.
 
-2. Data Understanding
+The variables we use to predict are commonly called **X** (or an **X matrix**). The column we are interested in predicting is commonly called **y** (or the **response vector**).
 
-3. Prepare Data
+In this case **X** is all the variables in the dataset that are not salary, while **y** is the salary column in the dataset.
 
-4. Model Data
+On the next page, you will see what happens when we try to use sklearn to fit a model to the data, and we will do some work to get useful predictions out of our sklearn model.
 
-5. Evaluate the Results
+---
 
-6. Deploy
+`20`
 
-Data Modeling Process
+In the modeling section, you will learn that step three of CRISP-DM is essential to getting the most out of your data. In this case, we are interested in using any of the variables we can from the dataset to predict an individual's salary.
 
-1. Instantiate
+The variables we use to predict are commonly called **X** (or an **X matrix**). The column we are interested in predicting is commonly called **y** (or the **response vector**).
 
-2. Fit
+In this case X is all the variables in the dataset that are not salary, while y is the salary column in the dataset.
 
-3. Predict
+On the next page, you will see what happens when we try to use sklearn to fit a model to the data, and we will do some work to get useful predictions out of our sklearn model.
 
-4. Score
+---
+
+`24`
 
 
 There are two main 'pain' points for passing data to machine learning models in sklearn:
 
-Missing Values
-Categorical Values
+1. Missing Values
+2. Categorical Values
+
 Sklearn does not know how you want to treat missing values or categorical variables, and there are lots of methods for working with each. For this lesson, we will look at common, quick fixes. These methods help you get your models into production quickly, but thoughtful treatment of missing values and categorical variables should be done to remove bias and improve predictions over time.
 
 Three strategies for working with missing values include:
 
-We can remove (or “drop”) the rows or columns holding the missing values.
-We can impute the missing values.
-We can build models that work around them, and only use the information provided.
+1. We can remove (or “drop”) the rows or columns holding the missing values.
+2. We can impute the missing values.
+3. We can build models that work around them, and only use the information provided.
+
+--- 
+
+`25`
 
 Though dropping rows and/or columns holding missing values is quite easy to do using numpy and pandas, it is often not appropriate.
 
 Understanding why the data is missing is important before dropping these rows and columns. In this video you saw a number of situations in which dropping values was not a good idea. These included
 
-Dropping data values associated with the effort or time an individual put into a survey.
-Dropping data values associated with sensitive information.
+1. Dropping data values associated with the effort or time an individual put into a survey.
+2. Dropping data values associated with sensitive information.
+
 In either of these cases, the missing values hold information. A quick removal of the rows or columns associated with these missing values would remove missing data that could be used to better inform models.
 
 Instead of removing these values, we might keep track of the missing values using indicator values, or counts associated with how many questions an individual skipped.
 
+---
+
+`26`
 
 n the last video, you saw cases in which dropping rows or columns associated with missing values would not be a good idea. There are other cases in which dropping rows or columns associated with missing values would be okay.
 
 A few instances in which dropping a row might be okay are:
 
-Dropping missing data associated with mechanical failures.
-The missing data is in a column that you are interested in predicting.
+1. Dropping missing data associated with mechanical failures.
+2. The missing data is in a column that you are interested in predicting.
+
 Other cases when you should consider dropping data that are not associated with missing data:
 
-Dropping columns with no variability in the data.
-Dropping data associated with information that you know is not correct.
+1. Dropping columns with no variability in the data.
+2. Dropping data associated with information that you know is not correct.
+
 In handling removing data, you should think more about why is this missing or why is this data incorrectly input to see if an alternative solution might be used than dropping the values.
 
+---
+
+`27`
 One common strategy for working with missing data is to understand the proportion of a column that is missing. If a large proportion of a column is missing data, this is a reason to consider dropping it.
 
 There are easy ways using pandas to create dummy variables to track the missing values, so you can see if these missing values actually hold information (regardless of the proportion that are missing) before choosing to remove a full column.
+
+---
+
+`33`
 
 Imputation is likely the most common method for working with missing values for any data science team. The methods shown here included the frequently used methods of imputing the mean, median, or mode of a column into the missing values for the column.
 
 There are many advanced techniques for imputing missing values including using machine learning and bayesian statistical approaches. This could be techniques as simple as using k-nearest neighbors to find the features that are most similar, and using the values those features have to fill in values that are missing or complex methods like those in the very popular [AMELIA library](https://cran.r-project.org/web/packages/Amelia/Amelia.pdf).
 
-Regardless your imputation approach, you should be very cautious of the BIAS you are imputing into any model that uses these imputed values. Though imputing values is very common, and often leads to better predictive power in machine learning models, it can lead to over generalizations. In extremely advanced techniques in Data Science, this can even mean [ethical implications](https://intelligence.org/files/EthicsofAI.pdf). Machines can only 'learn' from the data they are provided. If you provide biased data (due to imputation, poor data collection, etc.), it should be no surprise, you will achieve results that are biased.
+Regardless your imputation approach, you should be very cautious of the **BIAS** you are imputing into any model that uses these imputed values. Though imputing values is very common, and often leads to better predictive power in machine learning models, it can lead to over generalizations. In extremely advanced techniques in Data Science, this can even mean [ethical implications](https://intelligence.org/files/EthicsofAI.pdf). Machines can only 'learn' from the data they are provided. If you provide biased data (due to imputation, poor data collection, etc.), it should be no surprise, you will achieve results that are biased.
+
+---
+
+`38`
+
+Notice that in the earlier video in the pre-requisites, there was a mention of dropping a column to assure your X matrix is full rank. This is not true using LinearRegression within sklearn, because there is a ridge (or L2 penalty used by default). However, dropping the columns would also be okay, it is just not required, as it is with OLS without a penalty.
+
+You will see this holds true in the upcoming content.
+
+---
+
 
 #### Categorical Variables
 
@@ -167,10 +252,29 @@ The **disadvantages** of this approach are that you introduce a large number of 
 
 Let's try out adding dummy variables for the categorical variables into the model.  We will compare to see the improvement over the original model only using quantitative variables.  
 
+---
+`41`
+
 ## Overfitting
 
 Overfitting is a common problem when our model does not generalize to data it has not seen before. Assuring you build models that not only work for the data the model was trained on, but also generalize to new (test) data, is key to building models that will be successful to deploy and that will become successful in production.
 
+---
+
+`45`
+Two techniques for deploying your results include:
+
+1. Automated techniques built into computer systems or across the web. You will do this later in this program!
+
+2. Communicate results with text, images, slides, dashboards, or other presentation methods to company stakeholders.
+
+To get some practice with this second technique, you will be writing a blog post for the first project and turning in a Github repository that shares your work.
+
+As a data scientist, communication of your results to both other team members and to less technical members of a company is a critical component
+
+---
+
+`RECAP`
 
 # CRISP-DM
 
@@ -202,7 +306,11 @@ Results are the findings from our wrangling and modeling. They are the answers y
 
 Deploying can occur by moving your approach into production or by using your results to persuade others within a company to act on the results. Communication is such an important part of the role of a data scientist.
 
-### Two techniques for deploying your results include:
+---
+
+# README Process
+
+## Two techniques for deploying your results include:
 
 Automated techniques built into computer systems or across the web. You will do this later in this program!
 
@@ -212,7 +320,7 @@ To get some practice with this second technique, you will be writing a blog post
 As a data scientist, communication of your results to both other team members and to less technical members of a company is a critical component
 
 
-# Readme Showcase
+### Readme Showcase
 
 [Sample Project](https://github.com/jjrunner/stackoverflow)
 
@@ -226,8 +334,11 @@ As a data scientist, communication of your results to both other team members an
 
 5.Licensing, Authors, Acknowledgements - You always want to give credit where necessary. Acknowledge other contributors, helpful peers, data providers, etc.
 
+---
 
-# Recap
+`RECAP`
+
+# Readme Process
 
 You are so ready to take on this project! I hope you are excited to create your own post! There was a lot to take away from this lesson. Here were the big points I had in mind:
 
