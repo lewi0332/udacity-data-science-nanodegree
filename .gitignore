@@ -132,3 +132,4 @@ dmypy.json
 .vscode/*
 .DS_Store
 the_data_science_process/PROJECT - Write a data science blog post/bigquery.json
+the_data_science_process/.vscode/settings.json
