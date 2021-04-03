@@ -51,6 +51,7 @@ or in other words, the standard deviation is the square root of the variance.
 f(k, n, p) = \frac{n\footnotesize{!}}{k!(n - k)!}p^k(1-p)^{(n-k)}f(k,n,p) = k!(n−k)! n! p k (1−p) (n−k)
  
 
+
 **Further Resources**
 
 If you would like to review the Gaussian (normal) distribution and binomial distribution, here are a few resources:
