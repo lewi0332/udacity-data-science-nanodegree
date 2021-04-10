@@ -310,3 +310,102 @@ As an aside, percentages and em units are actually calculating sizes relative to
 </body><br>
 
 Because different browsers might render html and CSS differently, there isn't necessarily a right or wrong way to specify sizes. This will depend on who will use your website and on what type of devices. You can read more here. You won't need to worry about all of this because in the web app, you're going to use a CSS framework that takes care of all of this for you.
+
+# Javascript 
+
+## JavaScript and this Lesson
+
+To build the data dashboard at the end of this lesson, you won't need to write any JavaScript at all. That's because you'll use libraries (Bootstrap and Plotly) that take care of the JavaScript for you.
+
+You won't need to get into the details of JavaScript syntax, but it's good to have at least an idea of what is happening under the hood.
+
+What is JavaScript?
+- JavaScript is a high level language like Python, PHP, Ruby, and C++. It was specifically developed to make the front-end of a web application more dynamic; however, you can also use javascript to program the back-end of a website with the JavaScript runtime environment node.
+- Java and javaScript are two completely different languages that happen to have similar names.
+- JavaScript syntax, especially for front-end web development, is a bit tricky. It's much easier to write front-end JavaScript code using a framework such as jQuery.
+
+## Basic JavaScript Syntax
+Here are a few rules to keep in mind when writing JavaScript:
+
+- a line of code ends with a semi-colon ;
+- () parenthesis are used when calling a function much like in Python
+- {} curly braces surround large chunks of code or are used when initializing dictionaries
+- [] square brackets are used for accessing values from arrays or dictionaries much like in Python
+
+Here is an example of a JavaScript function that sums the elements of an array.
+
+```
+function addValues(x) {
+  var sum_array = 0;
+  for (var i=0; i < x.length; i++) {   
+    sum_array += x[i];
+  }
+  return sum_array;
+}
+
+addValues([3,4,5,6]);
+```
+
+## What is jQuery?
+Jquery is a JavaScript library that makes developing the front-end easier. JavaScript specifically helps with manipulating html elements. The reason we are showing you Jquery is because the Bootstrap library you'll be using depends on Jquery. But you won't need to write any Jquery yourself.
+
+Here is a link to the documentation of the core functions in jquery: [jQuery API documentation](https://api.jquery.com/)
+
+Jquery came out in 2006. There are newer JavaScript tools out there like [React](https://reactjs.org/) and [Angular](https://angularjs.org/).
+
+As a data scientist, you probably won't need to use any of these tools. But if you work in a startup environment, you'll most likely hear front-end engineers talking about these tools.
+
+## jQuery Syntax
+
+The jQuery library simplifies JavaScript quite a bit. Compare the syntax. Compare these two examples from the video for changing the h1 title element when clicking on the image.
+
+This is pure JavaScript code for changing the words in the h1 title element.
+
+```
+        function headFunction() {
+            document.getElementsByTagName("h1")[0].innerHTML = 
+                  "A Photo of a Breathtaking View";
+        }
+```
+
+This code searches the html document for all h1 tags, grabs the first h1 tag in the array of h1 tags, and then changes the html. Note that the above code is only the function. You'd also have to add an onClick action in the image html tag like so:
+
+```
+<img src="image.jpg" onclick="headFunction()">
+```
+
+The jQuery code is more intuitive. Once the document has loaded, the following code adds an onclick event to the image. Once the image is clicked, the h1 tag's text is changed.
+
+```
+         $(document).ready(function(){
+            $("img").click(function(){
+                $("h1").text("A Photo of a Breathtaking View");
+            });
+        });
+```
+
+The dollar sign $ is jQuery syntax that says "grab this element, class or id". That part of the syntax should remind you somewhat of CSS. For example $("p#first") means find the paragraph with id="first". Or $("#first") would work as well.
+
+Javascript has something called callback function, which can make learning javascript a bit tricky. Callback functions are essentially functions that can be inputs into other functions. In the above code, there is the ready() function that waits for the html document to load. Then there is another function being passed into the ready function. This section function adds an on-click event to an image tag. Then there's another function passed into the click() function, which changes the h1 text.
+
+# Plotly
+
+## Chart Libraries
+There are many web chart libraries out there for all types of use cases. When choosing a library, you should consider checking whether or not the library is still being actively developed.
+
+[d3.js](https://d3js.org/) is one of the most popular (and complex!) javascript data visualization libraries. This library is still actively being developed, which you can tell because the latest commit to the [d3 GitHub repository](https://github.com/d3/d3) is fairly recent.
+
+Other options include [chart.js](https://classroom.udacity.com/nanodegrees/nd025/parts/0469f04b-1440-4b2c-9f69-8882d6ec436b/modules/237f5e87-7a8e-49d1-aab9-241006ce715e/lessons/3737ebcb-984e-4959-bf2a-95fe13de4916/concepts/ww.chartjs.org/), [Google Charts](https://developers.google.com/chart/), and [nvd3.js](http://nvd3.org/), which is built on top of d3.js
+
+## Why Plotly
+For this lesson, we've chosen plotly for a specific reason: [Plotly](https://plot.ly/), although a private company, provides open source libraries for both JavaScript and Python.
+
+Because the web app you're developing will have a Python back-end, you can use the Python library to create your charts. Rather than having you learn more JavaScript syntax, you can use the Python syntax that you already know. However, you haven't built a back-end yet, so for now, you'll see the basics of how Plotly works using the JavaScript library. The syntax between the Python and Javascript versions is similar.
+
+Later in the lesson, you'll switch to the Python version of the Plotly library so that you can prepare visualizations on the back-end of your web app. Yet you could write all the visualization code in JavaScript if you wanted to. Watch the screencast below to learn the basics of how Plotly works, and then continue on to the Plotly exercise.
+
+Here are a few links to some helpful parts of the plotly documentation:
+
+[javascript examples](https://plot.ly/javascript/)
+[getting started](https://plot.ly/javascript/getting-started/)
+[linking to the plotly library](https://plot.ly/javascript/getting-started/#plotlyjs-cdn)
