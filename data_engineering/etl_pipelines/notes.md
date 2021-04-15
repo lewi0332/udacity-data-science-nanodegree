@@ -183,3 +183,11 @@ In the World Bank Indicator data sets, the Democratic Republic of the Congo is r
 In this lesson, you'll see how to extract data from the web using an APIs (Application Programming Interface). APIs generally provide data in either JSON or XML format.
 
 Companies and organizations provide APIs so that programmers can access data in an official, safe way. APIs allow you to download, and sometimes even upload or modify, data from a web server without giving you direct access.
+
+## Outliers - How to Find Them
+
+## Outlier Detection Resources [Optional]
+Here are a couple of links to outlier detection processes and algorithms. Since this is an ETL course rather than a statistics course, you don't need to read these in order to complete the lesson.
+
+[scikit-learn novelty and outlier detection](http://scikit-learn.org/stable/modules/outlier_detection.html)
+[statistical and machine learning methods for outlier detection](https://towardsdatascience.com/a-brief-overview-of-outlier-detection-techniques-1e0b2c19e561)
