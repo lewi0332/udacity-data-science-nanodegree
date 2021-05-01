@@ -209,3 +209,99 @@ There's a mnemonic called SMART for teams to plan out projects that also happens
 - Timely: Results must be obtainable in a reasonable time frame.
 
 There are also other words possible for the mnemonic, such as **A**ctionable and **R**ealistic. Ultimately, however, the message is pretty much the same, with the dimensions switched around a bit. Note, however, that the mnemonic doesn't cover certain considerations important to experiment design. Considerations of ethical issues or bias will need to be considered separately, so don't just take the mnemonic as the final judge of whether your experiment is ready to proceed!
+
+# Statiscal Considerations in Testing 
+
+## Practical Significance
+
+Even if an experiment result shows a statistically significant difference in an evaluation metric between control and experimental groups, that does not necessarily mean that the experiment was a success. If there are any costs associated with deploying a change, those costs might outweigh the benefits expected based on the experiment results. **Practical significance** refers to the level of effect that you need to observe in order for the experiment to be called a true success and implemented in truth. Not all experiments imply a practical significance boundary, but it's an important factor in the interpretation of outcomes where it is relevant.
+
+If you consider the confidence interval for an evaluation metric statistic against the null baseline and practical significance bound, there are a few cases that can come about.
+
+**Confidence interval is fully in practical significance region**
+
+(Below, m_0m 0 indicates the null statistic value, d_{min}d 
+min the practical significance bound, and the blue line the confidence interval for the observed statistic. We assume that we're looking for a positive change, ignoring the negative equivalent for d_{min}d min.)
+
+![confidence_interval_1](viz/c03-practicalsignificance-01.png)
+
+If the confidence interval for the statistic does not include the null or the practical significance level, then the experimental manipulation can be concluded to have a statistically and practically significant effect. It is clearest in this case that the manipulation should be implemented as a success.
+
+**Confidence interval completely excludes any part of practical significance region**
+
+![confidence interval 2](viz/c03-practicalsignificance-02.png)
+
+
+If the confidence interval does not include any values that would be considered practically significant, this is a clear case for us to not implement the experimental change. This includes the case where the metric is statistically significant, but whose interval does not extend past the practical significance bounds. With such a low chance of practical significance being achieved on the metric, we should be wary of implementing the change.
+
+**Confidence interval includes points both inside and outside practical significance bounds**
+
+![confidence interval 3](viz/c03-practicalsignificance-03.png)
+
+
+This leaves the trickiest cases to consider, where the confidence interval straddles the practical significance bound. In each of these cases, there is an uncertain possibility of practical significance being achieved. In an ideal world, you would be able to collect more data to reduce our uncertainty, reducing the scenario to one of the previous cases. Outside of this, you'll need to consider the risks carefully in order to make a recommendation on whether or not to follow through with a tested change. Your analysis might also reveal subsets of the population or aspects of the manipulation that do work, in order to refine further studies or experiments.
+
+<center>
+
+![latextest](https://latex.codecogs.com/gif.latex?n=\lceil\big(\frac{z_{\alpha}s_{0}-z_{\beta}s_{1}}{p_1-p_0}\big)^2\rceil)
+
+</center>
+
+
+## Using Dummy Tests
+When it comes to designing an experiment, it might be useful to run a dummy test as a predecessor to or as part of that process. In a dummy test, you will implement the same steps that you would in an actual experiment to assign the experimental units into groups. However, the experimental manipulation won't actually be implemented, and the groups will be treated equivalently.
+
+There are multiple reasons to run a dummy test. First, a dummy test can expose if there are any errors in the randomization or assignment procedures. A short dummy test can be worth the investment if an invariant metric is found to have a statistically significant difference, or if some other systematic bias is identified, because it can help avoid larger problems down the line. A second reason to run a dummy test is to collect data on metrics' behaviors. If historic data is not enough to predict the outcome of recorded metrics or allow for experiment duration to be computed, then a dummy test can be useful for getting baselines.
+
+Of course, performing a dummy test requires an investment of resources, the most important of which is time. If time is of the essence, then you may need to just go ahead with the experiment, keeping an eye on invariant metrics for any trouble. An alternative approach is to perform a hybrid test. In the A/B testing paradigm, this can take the form of an A/A/B test. That is, we split the data into three groups: two control and one experimental. A comparison between control groups can be used to learn about null-environment properties before making inferences on the effect of the experimental manipulation.
+
+## Analyzing Multiple Metrics
+If you're tracking multiple evaluation metrics, make sure that you're aware of how the Type I error rates on individual metrics can affect the overall chance of making some kind of Type I error. The simplest case we can consider is if we have _n_ independent evaluation metrics, and that seeing one with a statistically significant result would be enough to call the manipulation a success. In this case, the probability of making at least one Type I error is given by \alpha_{over} = 1 - (1-\alpha_{ind})^nα over=1−(1−α i) n, illustrated in the below image for individual \alpha_{ind} = .05α ind =.05 and \alpha_{ind} = .01α ind =.01:
+
+<center>
+
+![significance](viz/c08-multimetrics-01.png)
+
+</center>
+
+To protect against this, we need to introduce a correction factor on the individual test error rate so that the overall error rate is at most the desired level. A conservative approach is to divide the overall error rate by the number of metrics tested:
+
+α ind =α over/n
+
+
+<center>
+
+![latex](https://latex.codecogs.com/gif.latex?\alpha=\alpha_over/n_α_ind=_α_over/n)
+
+</center>
+
+This is known as the **Bonferroni correction**. If we assume independence between metrics, we can do a little bit better with the **Šidák correction**:
+
+α ind =1−(1−α over ) 1/n
+
+<center>
+
+![latex](https://latex.codecogs.com/gif.latex?\alpha_ind=1-(1-\alpha_over)^1/nαind=1−(1−αover)1/n)
+
+</center>
+ 
+<center>
+
+![significance](viz/c08-multimetrics-02.png)
+
+</center>
+
+The Šidák correction is only slightly higher than the line drawn by the Bonferroni correction.
+
+In real life, evaluation scenarios are rarely so straightforward. Metrics will likely be correlated in some way, rather than being independent. If a positive correlation exists, then knowing the outcome of one metric will make it more likely for a correlated metric to also point in the same way. In this case, the corrections above will be more conservative than necessary, resulting in an overall error rate smaller than the desired level. (In cases of negative correlation, the true error rate could go either way, depending on the types of tests performed.)
+
+In addition, we might need multiple metrics to show statistical significance to call an experiment a success, or there may be different degrees of success depending on which metrics appear to be moved by the manipulation. One metric may not be enough to make it worth deploying a change tested in an experiment. Reducing the individual error rate will make it harder for a truly significant effect to show up as statistically significant. That is, reducing the Type I error rate will also increase the Type II error rate – another conservative shift.
+
+Ultimately, there is a small balancing act when it comes to selecting an error-controlling scheme. Being fully conservative with one of the simple corrections above means that you increase the risk of failing to roll out changes that actually have an impact on metrics. Consider the level of dependence between metrics and what results are needed to declare a success to calibrate the right balance in error rates. If you need to see a significant change in all of your metrics to proceed with it, you might not need a correction factor at all. You can also use dummy test results, bootstrapping, and permutation approaches to plan significance thresholds. Finally, don't forget that practical significance can be an all-important quality that overrides other statistical significance findings.
+
+While the main focus of this page has been on interpretation of evaluation metrics, it's worth noting that these cautions also apply to invariant metrics. The more invariant metrics you test, the more likely it will be that some test will show a statistically significant difference even if the groups tested are drawn from equivalent populations. However, it might not be a good idea to apply a correction factor to individual tests since we want to avoid larger issues with interpretation later on. As mentioned previously, a single invariant metric showing a statistically significant difference is not necessarily cause for alarm, but it is something that merits follow-up in case it does have an effect on our analysis.
+
+## Early Stopping
+As the above workspace shows, there are significant risks for peeking ahead and making an early decision if it is not planned for in the design. If you haven't accounted for the effects of peeking on your error rate, then it's best to resist the temptation to look at the results early, and only perform a final analysis at the end of the experiment. This is another reason why it's important to design an experiment ahead of any data collection.
+
+Note that there are ways of putting together a design to allow for making an early decision on an experiment. In the workspace, we showed how to treat the problem like a multiple comparisons problem, adjusting the individual test-wise error rate to preserve an overall error rate. For continuous tracking, [this page](https://www.evanmiller.org/sequential-ab-testing.html) describes a rule of thumb for rate-based metrics, tracking the number of successes in each group and stopping the experiment once the counts' sum or difference exceeds some threshold. More generally, tests like the sequential probability ratio test can be developed to make an early stopping decision while an experiment is running, if it looks statistically unlikely for a metric to move past or fall back against the statistical significance bound.
