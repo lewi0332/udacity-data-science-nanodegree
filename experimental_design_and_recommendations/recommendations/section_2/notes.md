@@ -75,11 +75,11 @@ Three main takeaways from the previous notebook:
 
 A closed form solution is one where you can directly find the solution values (unlike iterative solutions, which are commonly used in practice). There isn't an iterative approach to solving a particular equation. One of the most popular examples of a closed form solution is the solution for multiple linear regression. That is if we want to find an estimate for \betaβ in the following situation:
 
-y = X\betay=Xβ
+$$y = X\beta y=Xβ$$
 
 We can find it by computing the Best Linear Unbiased Estimate (BLUE). It can be found in closed form using the equation:
 
-\hat{\beta} = (X'X)^-X'y 
+$$\hat{\beta} = (X'X)^-X'y 
 β
 ^
 ​	 =(X 
@@ -88,25 +88,26 @@ We can find it by computing the Best Linear Unbiased Estimate (BLUE). It can be 
 −
  X 
 ′
- y
+ y$$
 
 where X is a matrix of explanatory inputs and y is a response vector.
 
 Another common example of a closed form solution is the quadratic equation. If we want to find x that solves:
 
-ax^2 + bx + c = 0ax 
+$$ax^2 + bx + c = 0ax 
 2
- +bx+c=0
+ +bx+c=0$$
 
 We can find these values using the quadratic formula:
 
+$$
 x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}x= 
 2a
 −b± 
 b 
 2
  −4ac
-​	 
+$$
 ​	 
 
 **Each of these is an example of a closed form solution, because in each case we have an equation that allows us to solve directly for our values of interest.**
@@ -117,19 +118,13 @@ It turns out there is a closed form solution for Singular Value Decomposition th
 
 As put in the paper -
 
-"Calculating the SVD consists of finding the eigenvalues and eigenvectors of AA'AA 
+"Calculating the SVD consists of finding the eigenvalues and eigenvectors of $AA'AA$ and $A'AA$ 
 ′
-  and A'AA 
+ A. The eigenvectors of $A'AA$ 
 ′
- A. The eigenvectors of A'AA 
-′
- A make up the columns of VV, the eigenvectors of AA'AA 
-′
-  make up the columns of UU. Also, the singular values in \SigmaΣ are square roots of eigenvalues from AA'AA 
-′
-  or A'AA 
-′
- A. The singular values are the diagonal entries of the \sigmaσ matrix and are arranged in descending order. The singular values are always real numbers. If the matrix AA is a real matrix, then UU and VV are also real."
+ A make up the columns of VV, the eigenvectors of $AA'AA$ make up the columns of $UU$. Also, the singular values in \SigmaΣ are square roots of eigenvalues from AA'AA or A'AA
+
+ A. The singular values are the diagonal entries of the \sigmaσ matrix and are arranged in descending order. The singular values are always real numbers. If the matrix AA is a real matrix, then UU and $VV$ are also real."
 
 Again, you can see a fully worked example of the closed form solution at the [MIT Link here](http://web.mit.edu/be.400/www/SVD/Singular_Value_Decomposition.htm).
 
@@ -169,5 +164,10 @@ This is the same process you will use to update each value in the matrix:
 u_new = u_old + {learn_rate * 2 * (actual - pred) * v_old}
 
 ```
+
+## The Cold Start Problem
+The **cold start problem** is the problem that new users and new items to a platform don't have any ratings. Because these users and items don't have any ratings, it is impossible to use collaborative filtering methods to make recommendations.
+
+Therefore, methods you used in the previous lesson like (rank-based and content-based recommenders) are the only way to get started with making recommendations for these individuals.
 
 
